@@ -206,7 +206,7 @@ const ChatWidget = () => {
               </h4>
               <p className="text-xs text-primary-foreground/70 flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                Powered by IA
+                Powered by Totallog
               </p>
             </div>
           </div>
