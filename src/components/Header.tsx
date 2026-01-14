@@ -62,7 +62,7 @@ const Header = () => {
           <nav className="flex items-center justify-between h-20">
             {/* Logo */}
             <a href="#inicio" className="flex-shrink-0" onClick={(e) => { e.preventDefault(); scrollToSection("#inicio"); }}>
-              <img src={logo} alt="Totallog" className="h-14 w-auto" />
+              <img src={logo} alt="Totallog" className="h-20 w-auto" />
             </a>
 
             {/* Desktop Navigation */}

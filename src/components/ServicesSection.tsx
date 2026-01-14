@@ -106,10 +106,10 @@ const ServicesSection = () => {
           </span>
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-6">
             Soluções Completas em
-            <span className="text-gradient block">Logística Internacional</span>
+            <span className="text-gradient block">despachos e logística Internacional</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Oferecemos um portfólio completo de serviços logísticos para atender todas as suas necessidades 
+            Oferecemos um portfólio completo de serviços aduaneiros para atender todas as suas necessidades 
             de importação e exportação.
           </p>
         </div>

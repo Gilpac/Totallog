@@ -15,7 +15,7 @@ const differentials = [
   {
     icon: HeadphonesIcon,
     title: "Suporte Dedicado",
-    description: "Equipa especializada disponível para acompanhar e orientar em cada etapa do processo logístico.",
+    description: "Equipa especializada disponível para acompanhar e orientar cada etapa do processo aduaneiro e logístico.",
   },
   {
     icon: Globe2,
@@ -81,7 +81,7 @@ const DifferentialsSection = () => {
             <span className="block text-blue-pale">Despacho Aduaneiro</span>
           </h2>
           <p className="text-lg text-primary-foreground/80">
-            Na TOTALLOG, o seu despacho aduaneiro é tratado com rigor, precisão e responsabilidade. 
+            Na TOTALLOG - Transitário, o seu despacho aduaneiro é tratado com rigor, precisão e responsabilidade. 
             A forma mais segura, eficiente e confiável de lidar com a alfândega.
           </p>
         </div>
@@ -118,7 +118,7 @@ const DifferentialsSection = () => {
           }`}
         >
           <p className="text-2xl md:text-3xl font-heading font-bold text-primary-foreground">
-            Precisão. Confiança. Profissionalismo.
+            Precisão. Confiança. Segurança. Profissionalismo.
           </p>
           <p className="text-blue-pale mt-2">Logística a todo alcance.</p>
         </div>

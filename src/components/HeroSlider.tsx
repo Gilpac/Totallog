@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import QuoteRequestModal from "@/components/QuoteRequestModal";
 import heroMaritime from "@/assets/hero-maritime.jpg";
 import heroAir from "@/assets/hero-air.jpg";
 import heroRoad from "@/assets/hero-road.jpg";
+import heroTotallog from "@/assets/hero-totallog.jpg";
 
 const slides = [
   {
@@ -24,11 +26,18 @@ const slides = [
     subtitle: "Cobertura Nacional",
     description: "Carga completa e fracionada com trânsito e transbordo aduaneiro.",
   },
+  {
+    image: heroTotallog,
+    title: "Totallog",
+    subtitle: "O Seu Parceiro Logístico",
+    description: "Soluções integradas de logística, despacho aduaneiro e transporte internacional.",
+  },
 ];
 
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const nextSlide = useCallback(() => {
     if (isAnimating) return;
@@ -113,10 +122,10 @@ const HeroSlider = () => {
                       <Button
                         size="lg"
                         variant="outline"
-                        onClick={() => scrollToSection("#contactos")}
+                        onClick={() => setIsQuoteModalOpen(true)}
                         className="border-2 border-primary-foreground text-primary-foreground bg-transparent hover:bg-primary-foreground hover:text-primary font-semibold px-8 py-6 text-lg rounded-xl transition-all duration-300"
                       >
-                        Entre em Contacto
+                        Solicite a sua Cotação
                       </Button>
                     </div>
                   </>
@@ -162,13 +171,8 @@ const HeroSlider = () => {
         ))}
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-8 z-20 hidden md:block">
-        <div className="flex flex-col items-center gap-2 text-primary-foreground/70">
-          <span className="text-xs uppercase tracking-wider rotate-90 origin-center translate-y-8">Scroll</span>
-          <div className="w-px h-16 bg-gradient-to-b from-primary-foreground/50 to-transparent animate-pulse-slow" />
-        </div>
-      </div>
+      {/* Quote Request Modal */}
+      <QuoteRequestModal open={isQuoteModalOpen} onOpenChange={setIsQuoteModalOpen} />
     </section>
   );
 };

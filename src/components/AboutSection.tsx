@@ -51,11 +51,11 @@ const AboutSection = () => {
               Quem Somos
             </span>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-6 leading-tight">
-              A Sua Parceira de
-              <span className="text-gradient block">Confiança em Logística</span>
+              O seu Parceiro de confiança em
+              <span className="text-gradient block">despacho aduaneiro</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              A <strong className="text-foreground">TOTALLOG</strong> é uma empresa de referência no setor de Importação e Exportação, 
+              A <strong className="text-foreground">TOTALLOG - Transitário</strong> é uma empresa de referência no setor de Importação e Exportação,
               com forte presença nacional e internacional. Somos especialistas em soluções completas de logística, 
               dedicada a oferecer serviços eficientes, seguros e sustentáveis.
             </p>

@@ -19,7 +19,15 @@ const contactInfo = [
   {
     icon: Clock,
     title: "Horário",
-    details: ["Segunda - Sexta: 8h - 18h", "Sábado: 8h - 13h"],
+    details: ["Segunda - Sexta: 08h - 17h", "Sábado: 8h - 13h"],
+  },
+  {
+    icon: MapPin,
+    title: "Endereços",
+    details: [
+      "Angola: Rua Rainha Nginga, Prédio da Suave 3º Andar - Luanda",
+      "Portugal: Avenida do Município da Ribeira Grande - Lote 121 - 2350-088 - Torres Novas",
+    ],
   },
 ];
 
@@ -84,7 +92,7 @@ const ContactSection = () => {
             <span className="text-gradient block">Connosco</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Estamos prontos para ajudar com as suas necessidades logísticas. 
+            Estamos prontos para ajudar com as suas necessidades de despachos aduaneiros para importação, exportação e logística. 
             Entre em contacto e descubra como podemos ser o seu parceiro de confiança.
           </p>
         </div>

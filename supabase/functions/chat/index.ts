@@ -44,8 +44,12 @@ CONTATOS:
 - Portugal: +351 936 678 136
 - Email: despachos@totallog.ao
 
+ENDEREÇOS:
+- Angola: Rua Rainha Nginga, Prédio da Suave 3º Andar - Luanda
+- Portugal: Avenida do Município da Ribeira Grande - Lote 121 - 2350-088 - Torres Novas
+
 HORÁRIO DE FUNCIONAMENTO:
-- Segunda a Sexta: 8h às 18h
+- Segunda a Sexta: 08h às 17h
 - Sábado: 8h às 13h
 
 MISSÃO: Prestar serviços de excelência trazendo valor acrescentado aos clientes.
