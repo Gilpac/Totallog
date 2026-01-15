@@ -19,6 +19,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
 import { User, Building2, Ship, Plane, Truck } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface QuoteRequestModalProps {
   open: boolean;
@@ -54,40 +55,82 @@ const QuoteRequestModal = ({ open, onOpenChange }: QuoteRequestModalProps) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const getServiceTypeName = (value: string) => {
+    const types: Record<string, string> = {
+      maritime: "Marítimo",
+      air: "Aéreo",
+      road: "Rodoviário",
+    };
+    return types[value] || value;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const emailData = {
+        type: "quote" as const,
+        clientType,
+        name: clientType === "individual" ? formData.fullName : formData.companyName,
+        phone: clientType === "individual" ? formData.phone : formData.companyPhone,
+        email: clientType === "individual" ? formData.email : formData.companyEmail,
+        nif: clientType === "individual" ? formData.nif : formData.companyNif,
+        companyName: formData.companyName,
+        position: formData.position,
+        serviceType: getServiceTypeName(formData.serviceType),
+        merchandiseType: formData.merchandiseType,
+        origin: formData.origin,
+        destination: formData.destination,
+        weight: formData.weight,
+        volume: formData.volume,
+        observations: formData.observations,
+      };
 
-    toast({
-      title: "Cotação Solicitada!",
-      description: "A sua solicitação foi enviada com sucesso. Entraremos em contacto em breve.",
-    });
+      const { data, error } = await supabase.functions.invoke("send-email", {
+        body: emailData,
+      });
 
-    setIsSubmitting(false);
-    onOpenChange(false);
-    
-    // Reset form
-    setFormData({
-      fullName: "",
-      phone: "",
-      email: "",
-      nif: "",
-      companyName: "",
-      companyNif: "",
-      position: "",
-      companyPhone: "",
-      companyEmail: "",
-      serviceType: "",
-      origin: "",
-      destination: "",
-      merchandiseType: "",
-      weight: "",
-      volume: "",
-      observations: "",
-    });
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Cotação Solicitada!",
+        description: "A sua solicitação foi enviada com sucesso. Entraremos em contacto em breve.",
+      });
+
+      onOpenChange(false);
+      
+      // Reset form
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        nif: "",
+        companyName: "",
+        companyNif: "",
+        position: "",
+        companyPhone: "",
+        companyEmail: "",
+        serviceType: "",
+        origin: "",
+        destination: "",
+        merchandiseType: "",
+        weight: "",
+        volume: "",
+        observations: "",
+      });
+    } catch (error: any) {
+      console.error("Error sending quote request:", error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Ocorreu um erro ao enviar a solicitação. Por favor, tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
