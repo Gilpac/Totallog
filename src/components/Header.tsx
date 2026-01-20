@@ -78,8 +78,20 @@ const Header = () => {
               ))}
             </div>
 
-            {/* CTA Button */}
-            <div className="hidden lg:block">
+            {/* Flags and CTA Button */}
+            <div className="hidden lg:flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <img 
+                  src="https://flagcdn.com/w40/ao.png" 
+                  alt="Angola" 
+                  className="h-5 w-auto rounded-sm shadow-sm"
+                />
+                <img 
+                  src="https://flagcdn.com/w40/pt.png" 
+                  alt="Portugal" 
+                  className="h-5 w-auto rounded-sm shadow-sm"
+                />
+              </div>
               <Button
                 onClick={() => scrollToSection("#contactos")}
                 className="btn-gradient border-0"

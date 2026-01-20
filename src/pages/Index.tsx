@@ -27,7 +27,6 @@ const Index = () => {
         </main>
         <Footer />
         <ChatWidget />
-        <WhatsAppButton />
       </div>
     </ChatProvider>
   );

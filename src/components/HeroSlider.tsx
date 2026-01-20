@@ -5,9 +5,16 @@ import QuoteRequestModal from "@/components/QuoteRequestModal";
 import heroMaritime from "@/assets/hero-maritime.jpg";
 import heroAir from "@/assets/hero-air.jpg";
 import heroRoad from "@/assets/hero-road.jpg";
-import heroTotallog from "@/assets/hero-totallog.jpg";
+import logo from "@/assets/totallog-logo.png";
 
 const slides = [
+  {
+    image: null,
+    title: "",
+    subtitle: "",
+    description: "",
+    isLogoSlide: true,
+  },
   {
     image: heroMaritime,
     title: "Carga Marítima",
@@ -25,12 +32,6 @@ const slides = [
     title: "Transporte Rodoviário",
     subtitle: "Cobertura Nacional",
     description: "Carga completa e fracionada com trânsito e transbordo aduaneiro.",
-  },
-  {
-    image: heroTotallog,
-    title: "Totallog",
-    subtitle: "O Seu Parceiro Logístico",
-    description: "Soluções integradas de logística, despacho aduaneiro e transporte internacional.",
   },
 ];
 
@@ -77,13 +78,17 @@ const HeroSlider = () => {
               : "opacity-0 scale-105"
           }`}
         >
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          />
+          {/* Background Image or Solid Color */}
+          {slide.isLogoSlide ? (
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1a365d] via-[#2d4a7c] to-[#1a365d]" />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            />
+          )}
           {/* Overlay */}
-          <div className="absolute inset-0 hero-overlay" />
+          {!slide.isLogoSlide && <div className="absolute inset-0 hero-overlay" />}
         </div>
       ))}
 
@@ -102,32 +107,44 @@ const HeroSlider = () => {
               >
                 {index === currentSlide && (
                   <>
-                    <span className="inline-block px-4 py-2 bg-secondary/90 text-secondary-foreground rounded-full text-sm font-semibold mb-6 animate-fade-in">
-                      {slide.subtitle}
-                    </span>
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-6 leading-tight animate-fade-in delay-100">
-                      {slide.title}
-                    </h1>
-                    <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 leading-relaxed animate-fade-in delay-200">
-                      {slide.description}
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 animate-fade-in delay-300">
-                      <Button
-                        size="lg"
-                        onClick={() => scrollToSection("#servicos")}
-                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-8 py-6 text-lg rounded-xl transition-all duration-300 hover:scale-105"
-                      >
-                        Nossos Serviços
-                      </Button>
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        onClick={() => setIsQuoteModalOpen(true)}
-                        className="border-2 border-primary-foreground text-primary-foreground bg-transparent hover:bg-primary-foreground hover:text-primary font-semibold px-8 py-6 text-lg rounded-xl transition-all duration-300"
-                      >
-                        Solicite a sua Cotação
-                      </Button>
-                    </div>
+                    {slide.isLogoSlide ? (
+                      <div className="flex items-center justify-center h-full px-4">
+                        <img 
+                          src={logo} 
+                          alt="Totallog" 
+                          className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto animate-fade-in drop-shadow-2xl brightness-0 invert"
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        <span className="inline-block px-4 py-2 bg-secondary/90 text-secondary-foreground rounded-full text-sm font-semibold mb-6 animate-fade-in">
+                          {slide.subtitle}
+                        </span>
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-6 leading-tight animate-fade-in delay-100">
+                          {slide.title}
+                        </h1>
+                        <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 leading-relaxed animate-fade-in delay-200">
+                          {slide.description}
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 animate-fade-in delay-300">
+                          <Button
+                            size="lg"
+                            onClick={() => scrollToSection("#servicos")}
+                            className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-8 py-6 text-lg rounded-xl transition-all duration-300 hover:scale-105"
+                          >
+                            Nossos Serviços
+                          </Button>
+                          <Button
+                            size="lg"
+                            variant="outline"
+                            onClick={() => setIsQuoteModalOpen(true)}
+                            className="border-2 border-primary-foreground text-primary-foreground bg-transparent hover:bg-primary-foreground hover:text-primary font-semibold px-8 py-6 text-lg rounded-xl transition-all duration-300"
+                          >
+                            Solicite a sua Cotação
+                          </Button>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </div>

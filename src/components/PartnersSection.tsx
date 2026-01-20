@@ -48,13 +48,7 @@ const PartnersSection = () => {
   ];
 
   return (
-    <section id="parceiros-section" className="py-24 bg-gradient-to-b from-muted/30 via-background to-muted/30 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      </div>
-
+    <section id="parceiros-section" className="py-24 bg-background relative overflow-hidden">
       <div className="container-custom relative z-10">
         {/* Header */}
         <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -73,7 +67,7 @@ const PartnersSection = () => {
         </div>
 
         {/* Stats Row */}
-        <div className={`grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-20 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-3">
@@ -85,52 +79,28 @@ const PartnersSection = () => {
           ))}
         </div>
 
-        {/* Partners Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        {/* Partners Logos - No Cards */}
+        <div className={`flex flex-wrap items-center justify-center gap-12 md:gap-16 lg:gap-24 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {partners.map((partner, index) => (
             <div
               key={index}
-              className={`group relative bg-card rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className="group flex flex-col items-center"
               style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Top accent line */}
-              <div className="h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
-              
-              {/* Logo container */}
-              <div className="relative p-8 flex flex-col items-center">
-                <div className="w-full h-40 flex items-center justify-center mb-4 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="max-h-32 max-w-full object-contain transition-transform duration-500 group-hover:scale-110 relative z-10"
-                  />
-                </div>
-                
-                {/* Partner info */}
-                <div className="text-center mt-4 pt-4 border-t border-border/50 w-full">
-                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                    {partner.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {partner.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Corner decoration */}
-              <div className="absolute bottom-0 right-0 w-16 h-16 overflow-hidden">
-                <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-primary/10 to-transparent transform translate-x-1/2 translate-y-1/2 rotate-45" />
-              </div>
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                className="h-16 md:h-20 lg:h-24 w-auto object-contain transition-all duration-500 hover:scale-110"
+              />
+              <span className="mt-4 text-sm text-muted-foreground text-center max-w-[180px]">
+                {partner.name}
+              </span>
             </div>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className={`text-center mt-16 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`text-center mt-20 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-muted-foreground">
             Interessado em tornar-se nosso parceiro?{" "}
             <a 
