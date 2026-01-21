@@ -3,6 +3,7 @@ import { Handshake, Award, Globe } from "lucide-react";
 import partnerEdilena from "@/assets/partner-edilena.png";
 import partnerDachser from "@/assets/partner-dachser.jpeg";
 import partnerCdoa from "@/assets/partner-cdoa.png";
+import partnerNossaSeguros from "@/assets/partner-nossa-seguros.png";
 
 const PartnersSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,6 +26,11 @@ const PartnersSection = () => {
 
   const partners = [
     { 
+      name: "Nossa Seguros", 
+      logo: partnerNossaSeguros,
+      description: "Parceiro em soluções de seguros"
+    },
+    { 
       name: "Edilena - Transitário, LDA", 
       logo: partnerEdilena,
       description: "Parceiro estratégico em transitário"
@@ -35,7 +41,7 @@ const PartnersSection = () => {
       description: "Logística inteligente global"
     },
     { 
-      name: "CDOA - Câmara dos Despachantes Oficiais de Angola", 
+      name: "CDOA", 
       logo: partnerCdoa,
       description: "Associação profissional de despachantes"
     },
@@ -46,6 +52,9 @@ const PartnersSection = () => {
     { icon: Award, value: "100%", label: "Compromisso" },
     { icon: Globe, value: "2", label: "Países" },
   ];
+
+  // Quadruple partners for seamless infinite scroll on all devices
+  const duplicatedPartners = [...partners, ...partners, ...partners, ...partners];
 
   return (
     <section id="parceiros-section" className="py-24 bg-background relative overflow-hidden">
@@ -79,24 +88,30 @@ const PartnersSection = () => {
           ))}
         </div>
 
-        {/* Partners Logos - No Cards */}
-        <div className={`flex flex-wrap items-center justify-center gap-12 md:gap-16 lg:gap-24 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {partners.map((partner, index) => (
-            <div
-              key={index}
-              className="group flex flex-col items-center"
-              style={{ transitionDelay: `${300 + index * 100}ms` }}
-            >
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="h-16 md:h-20 lg:h-24 w-auto object-contain transition-all duration-500 hover:scale-110"
-              />
-              <span className="mt-4 text-sm text-muted-foreground text-center max-w-[180px]">
-                {partner.name}
-              </span>
-            </div>
-          ))}
+        {/* Partners Infinite Scroll Carousel */}
+        <div className={`relative overflow-hidden transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {/* Gradient fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          
+          {/* Scrolling container */}
+          <div className="flex animate-infinite-scroll" style={{ width: 'max-content' }}>
+            {duplicatedPartners.map((partner, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 flex flex-col items-center justify-center w-[200px] md:w-[240px] lg:w-[280px]"
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-14 md:h-20 lg:h-24 w-auto max-w-[160px] md:max-w-[200px] object-contain transition-all duration-500 hover:scale-110"
+                />
+                <span className="mt-3 text-xs md:text-sm text-muted-foreground text-center px-2">
+                  {partner.name}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}
