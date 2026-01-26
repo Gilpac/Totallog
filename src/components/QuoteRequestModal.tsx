@@ -42,6 +42,8 @@ const QuoteRequestModal = ({ open, onOpenChange }: QuoteRequestModalProps) => {
     companyPhone: "",
     companyEmail: "",
     // Common fields
+    regime: "",
+    requiresInsurance: "",
     serviceType: "",
     origin: "",
     destination: "",
@@ -78,6 +80,8 @@ const QuoteRequestModal = ({ open, onOpenChange }: QuoteRequestModalProps) => {
         nif: clientType === "individual" ? formData.nif : formData.companyNif,
         companyName: formData.companyName,
         position: formData.position,
+        regime: formData.regime,
+        requiresInsurance: formData.requiresInsurance,
         serviceType: getServiceTypeName(formData.serviceType),
         merchandiseType: formData.merchandiseType,
         origin: formData.origin,
@@ -117,6 +121,8 @@ const QuoteRequestModal = ({ open, onOpenChange }: QuoteRequestModalProps) => {
         origin: "",
         destination: "",
         merchandiseType: "",
+        regime: "",
+        requiresInsurance: "",
         weight: "",
         volume: "",
         observations: "",
@@ -279,6 +285,40 @@ const QuoteRequestModal = ({ open, onOpenChange }: QuoteRequestModalProps) => {
             <h3 className="text-lg font-semibold text-primary">Detalhes do Serviço</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="regime">Regime *</Label>
+                <Select
+                  value={formData.regime}
+                  onValueChange={(value) => handleInputChange("regime", value)}
+                  required
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione o regime" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="importacao">Importação</SelectItem>
+                    <SelectItem value="exportacao">Exportação</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="requiresInsurance">Requer Seguro *</Label>
+                <Select
+                  value={formData.requiresInsurance}
+                  onValueChange={(value) => handleInputChange("requiresInsurance", value)}
+                  required
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione uma opção" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sim">Sim</SelectItem>
+                    <SelectItem value="nao">Não</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="serviceType">Tipo de Serviço *</Label>
                 <Select

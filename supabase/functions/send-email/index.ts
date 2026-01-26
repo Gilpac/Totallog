@@ -15,6 +15,8 @@ interface QuoteEmailRequest {
   nif: string;
   companyName?: string;
   position?: string;
+  regime: string;
+  requiresInsurance: string;
   serviceType: string;
   merchandiseType: string;
   origin: string;
@@ -74,42 +76,44 @@ const handler = async (req: Request): Promise<Response> => {
           <div style="padding: 30px; background: #f8f9fa;">
             <div style="background: white; border-radius: 8px; padding: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <h2 style="color: #1e3a5f; font-size: 16px; margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #f97316;">
-                Dados do Cliente (${quoteData.clientType === "individual" ? "Pessoa Singular" : "Empresa"})
+                📋 Dados do Cliente (${quoteData.clientType === "individual" ? "Pessoa Singular" : "Empresa"})
               </h2>
               
               <table style="width: 100%; border-collapse: collapse;">
                 ${quoteData.clientType === "company" ? `
-                  <tr><td style="padding: 8px 0; color: #666; width: 140px;">Empresa:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.companyName}</td></tr>
-                  <tr><td style="padding: 8px 0; color: #666;">Contacto:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.name}</td></tr>
-                  <tr><td style="padding: 8px 0; color: #666;">Cargo:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.position}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #666; width: 140px;">🏢 Empresa:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.companyName}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #666;">👤 Contacto:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.name}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #666;">💼 Cargo:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.position}</td></tr>
                 ` : `
-                  <tr><td style="padding: 8px 0; color: #666; width: 140px;">Nome:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.name}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #666; width: 140px;">👤 Nome:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.name}</td></tr>
                 `}
-                <tr><td style="padding: 8px 0; color: #666;">Telefone:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.phone}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">E-mail:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.email}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">NIF:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.nif}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📞 Telefone:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.phone}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📧 E-mail:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.email}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">🆔 NIF:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.nif}</td></tr>
               </table>
             </div>
             
             <div style="background: white; border-radius: 8px; padding: 25px; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <h2 style="color: #1e3a5f; font-size: 16px; margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #f97316;">
-                Detalhes do Serviço
+                🚚 Detalhes do Serviço
               </h2>
               
               <table style="width: 100%; border-collapse: collapse;">
-                <tr><td style="padding: 8px 0; color: #666; width: 140px;">Tipo de Serviço:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.serviceType}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Mercadoria:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.merchandiseType}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Origem:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.origin}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Destino:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.destination}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Peso Aprox.:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.weight}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Volume Aprox.:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.volume}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; width: 140px;">📋 Regime:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.regime === 'importacao' ? 'Importação' : 'Exportação'}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">🛡️ Requer Seguro:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.requiresInsurance === 'sim' ? 'Sim' : 'Não'}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">🔧 Tipo de Serviço:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.serviceType}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📦 Mercadoria:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.merchandiseType}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📍 Origem:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.origin}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">🎯 Destino:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.destination}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">⚖️ Peso Aprox.:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.weight}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📐 Volume Aprox.:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${quoteData.volume}</td></tr>
               </table>
             </div>
             
             ${quoteData.observations ? `
               <div style="background: white; border-radius: 8px; padding: 25px; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <h2 style="color: #1e3a5f; font-size: 16px; margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 2px solid #f97316;">
-                  Observações
+              <h2 style="color: #1e3a5f; font-size: 16px; margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 2px solid #f97316;">
+                  📝 Observações
                 </h2>
                 <p style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #f97316; margin: 0; color: #333; line-height: 1.6;">
                   ${quoteData.observations}
@@ -146,20 +150,20 @@ const handler = async (req: Request): Promise<Response> => {
           <div style="padding: 30px; background: #f8f9fa;">
             <div style="background: white; border-radius: 8px; padding: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <h2 style="color: #1e3a5f; font-size: 16px; margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #f97316;">
-                Dados do Remetente
+                📋 Dados do Remetente
               </h2>
               
               <table style="width: 100%; border-collapse: collapse;">
-                <tr><td style="padding: 8px 0; color: #666; width: 100px;">Nome:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.name}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">E-mail:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.email}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Telefone:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.phone}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666;">Assunto:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.subject}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; width: 100px;">👤 Nome:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.name}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📧 E-mail:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.email}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📞 Telefone:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.phone}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666;">📌 Assunto:</td><td style="padding: 8px 0; color: #1e3a5f; font-weight: 500;">${contactData.subject}</td></tr>
               </table>
             </div>
             
             <div style="background: white; border-radius: 8px; padding: 25px; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <h2 style="color: #1e3a5f; font-size: 16px; margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 2px solid #f97316;">
-                Mensagem
+                💬 Mensagem
               </h2>
               <p style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #f97316; margin: 0; color: #333; line-height: 1.6; white-space: pre-wrap;">
                 ${contactData.message}
