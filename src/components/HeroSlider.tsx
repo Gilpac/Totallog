@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import QuoteRequestModal from "@/components/QuoteRequestModal";
+import { useIsMobile } from "@/hooks/use-mobile";
 import heroTotallog from "@/assets/hero-totallog-new.jpg";
 import heroMaritime from "@/assets/hero-maritime-new.jpg";
 import heroAir from "@/assets/hero-air-new.jpg";
@@ -29,6 +30,7 @@ const slides = [
     subtitle: "Transporte Global",
     description: "Soluções completas de FCL, LCL e Break Bulk para os seus envios marítimos internacionais.",
     hasOverlay: true,
+    desktopBgPosition: "bg-[right_top]",
   },
   {
     image: heroAir,
@@ -36,6 +38,7 @@ const slides = [
     subtitle: "Rapidez e Eficiência",
     description: "Transporte aéreo nacional e internacional com segurança e pontualidade.",
     hasOverlay: true,
+    desktopBgPosition: "bg-[right_top]",
   },
   {
     image: heroRoad,
@@ -71,6 +74,7 @@ const slides = [
     subtitle: "Especialização",
     description: "Logística especializada para produtos farmacêuticos e de saúde.",
     hasOverlay: false,
+    desktopBgPosition: "bg-[right_top]",
   },
   {
     image: heroEscritorio1,
@@ -99,6 +103,7 @@ const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const nextSlide = useCallback(() => {
     if (isAnimating) return;
@@ -140,8 +145,15 @@ const HeroSlider = () => {
         >
           {/* Background Image */}
           <div
-            className={`absolute inset-0 bg-cover ${index === 0 ? 'bg-[center_right_13%] sm:bg-center' : 'bg-center'}`}
-            style={{ backgroundImage: `url(${slide.image})` }}
+            className="absolute inset-0 bg-cover"
+            style={{ 
+              backgroundImage: `url(${slide.image})`,
+              backgroundPosition: index === 0 
+                ? (isMobile ? 'center right 13%' : 'center')
+                : slide.desktopBgPosition 
+                  ? (isMobile ? 'center' : 'right top')
+                  : 'center'
+            }}
           />
           {/* Overlay - only for slides with hasOverlay true and not logo slide */}
           {slide.hasOverlay && !slide.isLogoSlide && <div className="absolute inset-0 hero-overlay" />}
